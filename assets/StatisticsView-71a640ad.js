@@ -1,1 +1,0 @@
-import{_ as t,o as s,c as e,a as c}from"./index-46824afd.js";const o={},i={clss:"statistics-view"},a=c("h1",null,"Statistics view",-1),_=[a];function n(r,d){return s(),e("div",i,_)}const f=t(o,[["render",n]]);export{f as default};
