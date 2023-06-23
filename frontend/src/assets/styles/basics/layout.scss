@@ -1,0 +1,40 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    background-color: #fff;
+    height: 100vh;
+    width: 100vw;
+
+    #app {
+        width: 100%;
+        height: 100%;
+        .app-container {
+            height: 100%;
+            width: 100%;
+            display: grid;
+            grid-template-rows: 5rem 1fr 5rem;
+
+            .app-header{
+                width: 100%;
+                height: 100%;
+            }
+
+            .app-footer{
+                width: 100%;
+                height: 100%;
+            }
+
+          }
+
+          .main-content {
+            width: 100%;
+            display: grid;
+            align-content: center;
+            justify-content: center;
+          }
+      }
+}
