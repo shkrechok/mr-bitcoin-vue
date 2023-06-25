@@ -1,4 +1,7 @@
 .home {
+  display: grid;
+  align-items: center;
+  justify-content: center;
   .basic-data-ctn {
     display: grid;
     grid-template-columns: 1fr 1fr;

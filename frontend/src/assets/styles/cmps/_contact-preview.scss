@@ -1,0 +1,18 @@
+.contact-preview {
+    display: grid;
+
+    .title {
+      grid-column: 1;
+      font-size: 1rem;
+      font-weight: 500;
+      color: $clr3;
+    }
+
+    .val {
+      grid-column: 2;
+      font-size: 1rem;
+      font-weight: 500;
+      color: $clr5;
+      justify-self: start;
+    }
+  }

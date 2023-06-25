@@ -1,6 +1,6 @@
 .contacts {
   justify-self: center;
-  height: 100%;
+  height: calc(100% - 2rem);
   width: 100%;
   display: grid;
   grid-template-rows: 5rem auto;
@@ -10,6 +10,12 @@
   border-color: $clr3;
   border-radius: 2px;
   box-shadow: inset 0 0 0.2rem $clr3;
+
+  .contact-list-ctn {
+    display: grid;
+    align-self: center;
+    height: fit-content;
+  }
 
   .contacts-header {
     display: grid;
@@ -22,51 +28,30 @@
     box-shadow: inset 0 0 0.2rem $clr3, 0 0 0 1px rgba(0, 0, 0, 0);
 
     .add-btn{
-        background-color: inherit;
-        border-width: 1px;
-        box-shadow: inset 0 0 0.2rem $clr3;
-        border-color: inherit;
-        color: $clr5;
-        border-radius: 2px;
-        height: 2.5rem;
-        width: 6.5rem;
+        @include unified-button-style;
+        
         a{
             color: inherit;
             text-decoration: none;
             color: inherit;
-            font-weight: 700;
+            font-weight: inherit;
         }
     }
 
     .filter {
         >* {
-            padding: 0;
-            margin: 0;
-            outline-color: $clr3;
-            outline-width: 1px;
-            border-color: $clr3;
-            border-width: 1px;
-            border-radius: 2px;
-            height: 2.5rem;
-            color: $clr5;
-            box-shadow: inset 0 0 0.2rem $clr3;
-            ::placeholder {
-                color: $clr3;
-            }
-
+            @include unified-txt-input-style;
         }
 
         input {
-            padding-inline-start: 0.5rem;
-            padding-inline-end: 0.5rem;
+            
             margin-inline-end: 1rem;
         }
 
         select {
-            padding-inline-start: 0.5rem;
-            padding-inline-end: 0.5rem;
-            background-color: $clr0;
-            font-weight: 700;
+            @include unified-button-style;
+            text-align: center;
+            
             option {
                 background-color: $clr0;
                 color: $clr5;
@@ -75,4 +60,8 @@
        
     }
   }
+
+  
 }
+
+

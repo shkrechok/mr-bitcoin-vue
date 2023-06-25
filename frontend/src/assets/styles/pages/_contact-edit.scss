@@ -1,0 +1,22 @@
+.contact-edit {
+    display: grid;
+    justify-content: center;
+    gap: calc(#{$commonMarginPadding} * 2);
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        input {
+            @include unified-txt-input-style;
+            width: 20rem;
+        }
+        button {
+            margin-block-start: 1rem;
+            @include unified-button-style;
+    }
+}
+
+.contact-preview {
+    gap :$commonMarginPadding;
+}
+}

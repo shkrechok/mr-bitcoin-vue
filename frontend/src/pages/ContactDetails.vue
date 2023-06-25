@@ -8,28 +8,32 @@ export default {
     };
   },
   async created() {
-    const contactId = this.$route.params.id
-    console.log("contactId", contactId)
+    const contactId = this.$route.params.id;
+    console.log("contactId", contactId);
     try {
-      this.contact = await contactService.getContactById(contactId)
+      this.contact = await contactService.getContactById(contactId);
     } catch (err) {
-      console.log("err", err)
+      console.log("err", err);
     }
   },
   methods: {
     onBack() {
-            this.$router.push('/contact')
-        }
+      this.$router.push("/contact");
+    },
   },
 };
 </script>
 
 <template>
   <div class="contact-details" v-if="contact">
-    <h1>Contact details</h1>
-    <p>{{ contact.name }}</p>
-    <p>{{ contact.email }}</p>
-    <p>{{ contact.phone }}</p>
+    <div class="contact-preview">
+      <span class="title">Name</span>
+      <span class="val">{{ contact.name }}</span>
+      <span class="title">Email</span>
+      <span class="val">{{ contact.email }}</span>
+      <span class="title">Phone number</span>
+      <span class="val" >{{ contact.phone }}</span>
+</div>
     <button class="back-btn" @click="onBack">Back</button>
   </div>
 </template>

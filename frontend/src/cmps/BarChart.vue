@@ -24,7 +24,8 @@
   
   </script>
   <template>
-    <Bar v-if="chartData"
+    <Bar style="margin: 0 0; height: 100%; width: 100%;"
+    v-if="chartData"
       id="my-chart-id"
       :options="chartOptions"
       :data="chartData"

@@ -1,0 +1,16 @@
+.contact-details {
+    display: grid;
+    justify-content: center;
+    gap: $commonMarginPadding;
+
+    button {
+        margin-block-start: 1rem;
+        height: $btnheight2;
+        width: $btnwidth2;
+        @include unified-button-style;
+    }
+
+    .contact-preview {
+        gap: $commonMarginPadding;
+    }
+}

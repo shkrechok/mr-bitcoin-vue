@@ -1,0 +1,35 @@
+.contact-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  justify-content: center;
+  list-style: none;
+  margin: 1px;
+  padding: 0;
+  gap: 1px;
+
+  .li-contact {
+    padding: 1rem;
+    border-style: solid;
+    border-width: 1px;
+    border-color: $clr4;
+    box-shadow: inset 0 0 0.2rem $clr4;
+  }
+
+  .btns {
+    display: grid;
+    grid-template-columns: $btnwidth2 $btnwidth2 1fr;
+    align-items: center;
+    gap: 1rem;
+    a.button,
+    button {
+      @include unified-button-style;
+      height: 2rem;
+      width: 5.5rem;
+      justify-self: start;
+    }
+    .remove-btn {
+        justify-self: end;
+    }
+    
+  }
+}

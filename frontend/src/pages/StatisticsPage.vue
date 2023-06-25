@@ -25,7 +25,7 @@ export default {
           datasets: [
             {
               label: "Bitcoin Market Price (USD)",
-              backgroundColor: "#f87979",
+              backgroundColor: "#6096baff",
               data: this.history.values.map((value) => value.y),
             },
           ],
@@ -41,7 +41,14 @@ export default {
 <template>
   <div class="statistics-page">
     <h1>Statistics view</h1>
-    <BarChart :chartData="chartData" v-if="history" />
+    <section class="chart-area">
+      <dev class="chart-container">
+        <BarChart :chartData="chartData" v-if="history" />
+      </dev>
+    </section>
   </div>
 </template>
+<style lang="scss">
+
+</style>
 

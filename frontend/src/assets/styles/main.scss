@@ -1,15 +1,23 @@
 //setup
 @import "setup/vars";
+@import "setup/mixins";
+
 
 //basics
 @import "basics/base";
 @import "basics/helpers";
 @import "basics/layout";
 
+
 //cmps
 @import "cmps/_app-header";
 @import "cmps/_app-footer";
+@import "cmps/_contact-preview";
+@import "cmps/_contact-list";
 
 //pages
 @import "pages/_home";
 @import "pages/_contacts";
+@import "pages/_contact-edit";
+@import "pages/_contact-details";
+@import "pages/_statistics-page";

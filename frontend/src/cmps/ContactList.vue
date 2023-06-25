@@ -14,19 +14,26 @@ export default {
 }
 </script>
 <template>
-    <div clss="contact list">
-        <ul>
+    <div class="contact-list-ctn">
+        <ul class="contact-list">
             <li class="li-contact" v-for="contact in contacts" :key="contact._id">
                 <ContactPreview :contact="contact"/>
+                <section class="btns">
                 <RouterLink :to="`/contact/${contact._id}`">
                     <button class="details-btn">Details</button>
                 </RouterLink>
                 <RouterLink :to="`/contact/edit/${contact._id}`">
                     <button class="edit-btn">Edit</button>
                 </RouterLink>
-                <button @click="deleteContact(contact._id)">x</button>
+                <button class="remove-btn" @click="deleteContact(contact._id)">Remove</button>
+                </section>
             </li>
 
         </ul>
     </div>
 </template>
+
+<style lang="scss">
+
+
+</style>
