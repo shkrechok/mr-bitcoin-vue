@@ -15,15 +15,16 @@ export default {
         ContactList
     },
     methods: {
-        onAddContact() {
-            this.$router.push('/contact/edit')
+        async onDeleteContact(contactId) {
+           await contactService.deleteContact(contactId)
+            this.contacts = this.contacts.filter(contact => contact._id !== contactId)
         }
     }
 }
 </script>
 <template>
     <div clss="contacts">
-        <button @click="onAddContact">Add Contact</button>
-        <ContactList :contacts="contacts"/>
+        <RouterLink to="/contact/edit">Add Contact</RouterLink>
+        <ContactList :contacts="contacts" @delete="onDeleteContact" v-if="contacts"/>
     </div>
 </template>

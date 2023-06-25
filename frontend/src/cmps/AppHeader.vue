@@ -25,7 +25,7 @@ export default {
         </section>
         <nav>
         <router-link to="/">Home</router-link>
-        <router-link to="/contacts">Contacts</router-link>
+        <router-link to="/contact">Contacts</router-link>
         <router-link to="/statistics">Statistic view</router-link>
         </nav>
     </header>
