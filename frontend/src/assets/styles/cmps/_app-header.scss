@@ -1,0 +1,45 @@
+.app-header{
+    grid-template-rows: 1fr;
+    background-color: $clr5;
+    color: $clr0;
+        align-content: center;
+        .header-central {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .user-data {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                p {
+                    margin: 0;
+                }
+            }
+            nav {
+                box-sizing: border-box;
+                height: 100%;
+                display: flex;
+                gap:1rem;
+                align-items: center;
+                justify-items: center;
+                justify-content: center;
+            }
+        }
+    }
+     
+    .link {
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        color: $clr0;
+        text-decoration: none;
+        &:hover{
+            color: $clr3;
+        }
+
+        &.active {
+            color: $clr4;
+        }
+        box-sizing: border-box;
+        height: 100%;
+    }

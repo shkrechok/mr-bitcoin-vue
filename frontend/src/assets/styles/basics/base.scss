@@ -1,0 +1,17 @@
+body {
+
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: $clr5;
+  background-color: $clr0;
+
+  .app-container {
+    background-color: $clr0;
+    grid-template-rows: 5rem 1fr 5rem;
+
+    .main-content {
+      background-color: $clr0;
+    }
+  }
+}

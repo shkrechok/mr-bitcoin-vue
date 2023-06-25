@@ -11,7 +11,7 @@ export default {
 
 
 <template>
-  <div  class="app-container">
+  <div  class="app-container main-layout">
     <AppHeader />
     <main class="main-content">
       <RouterView />

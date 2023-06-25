@@ -18,27 +18,20 @@ export default {
 }
 </script>
 <template>
-    <header class="app-header">
+    <header class="app-header full main-layout">
+        <div class="header-central">
         <section class="user-data" v-if="loggedInUser">
             <p>Hello {{ loggedInUser.name }}</p>
             <p>Bitcoin rate: {{ bitcoinRate }}</p>
         </section>
         <nav>
-        <router-link to="/">Home</router-link>
-        <router-link to="/contact">Contacts</router-link>
-        <router-link to="/statistics">Statistic view</router-link>
+        <router-link class="link" active-class="active" to="/">Home</router-link>
+        <router-link class="link" active-class="active" to="/contact">Contacts</router-link>
+        <router-link class="link" active-class="active" to="/statistics">Statistic view</router-link>
         </nav>
+        </div>
     </header>
 </template>
 <style lang="scss">
-.app-header {
-    display: grid;
-    grid-template-rows: 1fr;
-    grid-template-columns: 1fr 1fr;
-    justify-content: center;
-    align-content: center;
-    justify-items: center;
-    align-items: center;
-    background-color:#7591ef;;
-}
+
 </style>

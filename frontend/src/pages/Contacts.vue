@@ -6,6 +6,10 @@ export default {
     data() {
         return {
             contacts: [],
+            filterBy: {
+                term: '',
+                filterBy: 'name'
+            }
         }
     },
    async created() {
@@ -18,13 +22,42 @@ export default {
         async onDeleteContact(contactId) {
            await contactService.deleteContact(contactId)
             this.contacts = this.contacts.filter(contact => contact._id !== contactId)
-        }
-    }
+        },
+    },
+
+    computed: {
+        filteredContacts() {
+            const { term, filterBy } = this.filterBy
+            if (!term) return this.contacts
+            else {
+                const contactsToShow = this.contacts.filter(contact => {
+                    return contact[filterBy].toLowerCase().includes(term.toLowerCase())
+                })
+                return contactsToShow
+                
+            }
+            
+        },
+    },
 }
 </script>
 <template>
-    <div clss="contacts">
-        <RouterLink to="/contact/edit">Add Contact</RouterLink>
-        <ContactList :contacts="contacts" @delete="onDeleteContact" v-if="contacts"/>
+    <div class="contacts">
+        <section class="contacts-header">
+        <button class="add-btn"><RouterLink to="/contact/edit">Add Contact</RouterLink></button>
+        <div class="filter">
+            <input type="text" placeholder="Search contact" v-model="filterBy.term"  />
+            <select v-model="filterBy.filterBy">
+                <option value="name">Name</option>
+                <option value="phone">Phone</option>
+                <option value="email">Email</option>
+            </select>
+        </div>
+        </section>
+        <ContactList :contacts="filteredContacts" @delete="onDeleteContact" v-if="contacts" />
     </div>
 </template>
+<style lang="scss">
+
+</style>
+
