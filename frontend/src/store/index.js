@@ -1,5 +1,7 @@
 import { createStore } from "vuex";
 import contact from "./modules/contact";
+import user from "./modules/user";
+
 const storeOptions = {
   state() {
     return {
@@ -13,6 +15,7 @@ const storeOptions = {
   },
   modules: {
     contact,
+    user,
   },
 }
 

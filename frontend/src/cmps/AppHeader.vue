@@ -6,14 +6,17 @@ import { bitcoinService } from "@/services/bitcoin.service";
 export default {
     data() {
         return {
-        loggedInUser: null,
         bitcoinRate: null,
         }
     },
     async created() {
-        this.loggedInUser = userService.getUser()
         this.bitcoinRate = await bitcoinService.getRate()
     },
+    computed:{
+        loggedInUser(){
+            return this.$store.getters.loggedInUser
+        }
+    }
     
 }
 </script>
@@ -24,8 +27,8 @@ export default {
             <p>Hello {{ loggedInUser.name }}</p>
             <p>Bitcoin rate: {{ bitcoinRate }}</p>
         </section>
-        <nav>
-        <router-link class="link" active-class="active" to="/">Home</router-link>
+        <nav v-if="loggedInUser">
+        <router-link class="link" active-class="active" to="/home">Home</router-link>
         <router-link class="link" active-class="active" to="/contact">Contacts</router-link>
         <router-link class="link" active-class="active" to="/statistics">Statistic view</router-link>
         </nav>
