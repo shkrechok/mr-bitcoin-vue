@@ -14,8 +14,11 @@ export default {
 }
 </script>
 <template>
-    <div class="contact-list-ctn">
-        <ul class="contact-list">
+    <div class="loading" v-if="!contacts.length">
+        <h1>Loading...</h1>
+    </div>
+    <div class="contact-list-ctn" v-if="contacts.length">
+        <TransitionGroup name="list" class="contact-list" tag="ul">
             <li class="li-contact" v-for="contact in contacts" :key="contact._id">
                 <ContactPreview :contact="contact"/>
                 <section class="btns">
@@ -29,11 +32,27 @@ export default {
                 </section>
             </li>
 
-        </ul>
+        </TransitionGroup>
     </div>
 </template>
 
 <style lang="scss">
 
+.list-move, /* apply transition to moving elements */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.3s ease;
+}
 
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+.list-leave-active {
+  position: absolute;
+}
 </style>

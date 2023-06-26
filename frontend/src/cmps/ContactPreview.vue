@@ -6,8 +6,8 @@ export default {
 }
 </script>
 <template>
-    <div class="contact-preview">
-            <span class="title">Name</span>
+    <div class="contact-preview" >
+            <span  class="title">Name</span>
             <span class="val">{{ contact.name }}</span>
             <span class="title">Email</span>
             <span class="val">{{ contact.email }}</span>

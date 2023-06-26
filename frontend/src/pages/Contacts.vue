@@ -1,11 +1,12 @@
 
 <script>
+import { showSuccessMsg, showErrorMsg } from '../services/eventBus.service.js'
 import ContactList from '../cmps/ContactList.vue'
 import { contactService } from '../services/contact.service.js'
 export default {
     data() {
         return {
-            contacts: [],
+            // contacts: [],
             filterBy: {
                 term: '',
                 filterBy: 'name'
@@ -13,15 +14,20 @@ export default {
         }
     },
    async created() {
-        this.contacts = await contactService.getContacts()
+        this.$store.dispatch({ type: 'loadContacts' })
     },
     components: {
         ContactList
     },
     methods: {
         async onDeleteContact(contactId) {
-           await contactService.deleteContact(contactId)
-            this.contacts = this.contacts.filter(contact => contact._id !== contactId)
+            try {
+                 this.$store.dispatch({ type: 'deleteContact', contactId })
+                showSuccessMsg('Contact deleted')
+            } catch (err) {
+                showErrorMsg('Cannot delete contact')
+            }
+           
         },
     },
 
@@ -38,6 +44,9 @@ export default {
             }
             
         },
+        contacts() {
+            return this.$store.getters.contacts
+        }
     },
 }
 </script>

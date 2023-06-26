@@ -1,7 +1,9 @@
+import { storageService } from './async-storage.service.js'
+
 export const contactService = {
     getContacts,
-    getContactById,
     deleteContact,
+    getContactById,
     saveContact,
     getEmptyContact
 }
@@ -124,7 +126,17 @@ const contacts = [
         "email": "lillyconner@renovize.com",
         "phone": "+1 (842) 587-3812"
     }
-];
+]
+ _createContacts()
+
+function _createContacts() {
+    let currContacts = JSON.parse(localStorage.getItem('contactDB'))
+    if (!currContacts || !currContacts.length) {
+        currContacts = contacts
+        localStorage.setItem('contactDB', JSON.stringify(currContacts))
+    }
+    return currContacts
+}
 
 function sort(arr) {
     return arr.sort((a, b) => {
@@ -139,50 +151,48 @@ function sort(arr) {
     })
 }
 
-function getContacts(filterBy = null) {
-    return new Promise((resolve, reject) => {
-        var contactsToReturn = contacts;
-        if (filterBy && filterBy.term) {
-            contactsToReturn = filter(filterBy.term)
+async function getContacts(filterBy = null) {
+    let contactsToReturn
+     try {
+        contactsToReturn = await storageService.query('contactDB')
+        return (sort(contactsToReturn))
+     } catch (err) {
+            console.log('Error while loading contacts')
+             throw err
         }
-        resolve(sort(contactsToReturn))
-    })
+    
 }
 
-function getContactById(id) {
-    return new Promise((resolve, reject) => {
-        const contact = contacts.find(contact => contact._id === id)
-        contact ? resolve(contact) : reject(`Contact id ${id} not found!`)
-    })
+
+
+async function deleteContact(id) {
+     try {
+        return await storageService.remove('contactDB', id)
+    } catch (err) {
+        console.log('Error while deleting contact')
+        throw err
+    }
+    
 }
 
-function deleteContact(id) {
-    return new Promise((resolve, reject) => {
-        const index = contacts.findIndex(contact => contact._id === id)
-        if (index !== -1) {
-            contacts.splice(index, 1)
-        }
-
-        resolve(contacts)
-    })
+async function _updateContact(contact) {
+    try {
+        return await storageService.put('contactDB', contact)
+    } catch (err) {
+        console.log('Error while updating contact')
+        throw err
+    }
+   
 }
 
-function _updateContact(contact) {
-    return new Promise((resolve, reject) => {
-        const index = contacts.findIndex(c => contact._id === c._id)
-        if (index !== -1) {
-            contacts[index] = contact
-        }
-        resolve(contact)
-    })
-}
+async function _addContact(contact) {
+    try {
+        return await storageService.post('contactDB', contact)
+    } catch (err) {
+        console.log('Error while adding contact')
+        throw err
+    }
 
-function _addContact(contact) {
-    return new Promise((resolve, reject) => {
-        contact._id = _makeId()
-        contacts.push(contact)
-        resolve(contact)
-    })
 }
 
 function saveContact(contact) {
@@ -197,14 +207,6 @@ function getEmptyContact() {
     }
 }
 
-function filter(term) {
-    term = term.toLocaleLowerCase()
-    return contacts.filter(contact => {
-        return contact.name.toLocaleLowerCase().includes(term) ||
-            contact.phone.toLocaleLowerCase().includes(term) ||
-            contact.email.toLocaleLowerCase().includes(term)
-    })
-}
 
 
 
@@ -216,3 +218,19 @@ function _makeId(length = 10) {
     }
     return txt
 }
+
+function getContactById(id) {
+    return new Promise((resolve, reject) => {
+        const contact = contacts.find(contact => contact._id === id)
+        contact ? resolve(contact) : reject(`Contact id ${id} not found!`)
+    })
+}
+
+// function filter(term) {
+//     term = term.toLocaleLowerCase()
+//     return contacts.filter(contact => {
+//         return contact.name.toLocaleLowerCase().includes(term) ||
+//             contact.phone.toLocaleLowerCase().includes(term) ||
+//             contact.email.toLocaleLowerCase().includes(term)
+//     })
+// }
