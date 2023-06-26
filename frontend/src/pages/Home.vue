@@ -27,6 +27,9 @@ export default {
     <section class="loading" v-if="!loggedInUser">
       <h1>Loading...</h1>
     </section>
+    <section class="transactions">
+      <pre>{{ loggedInUser.transactions }}</pre>
+    </section>
     <section class="basic-data-ctn" v-if="loggedInUser">
       <span class="title">Your name</span>
       <span class="val">{{ loggedInUser.name }}</span>

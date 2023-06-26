@@ -5,6 +5,7 @@
   .basic-data-ctn {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: $commonMarginPadding;
 
     .title {
       grid-column: 1;

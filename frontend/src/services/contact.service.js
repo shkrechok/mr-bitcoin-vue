@@ -8,7 +8,7 @@ export const contactService = {
     getEmptyContact
 }
 
-
+const CONTACT_KEY = "user_db"
 
 const contacts = [
     {
@@ -130,10 +130,10 @@ const contacts = [
  _createContacts()
 
 function _createContacts() {
-    let currContacts = JSON.parse(localStorage.getItem('contactDB'))
+    let currContacts = JSON.parse(localStorage.getItem(CONTACT_KEY))
     if (!currContacts || !currContacts.length) {
         currContacts = contacts
-        localStorage.setItem('contactDB', JSON.stringify(currContacts))
+        localStorage.setItem(CONTACT_KEY, JSON.stringify(currContacts))
     }
     return currContacts
 }
@@ -154,7 +154,7 @@ function sort(arr) {
 async function getContacts(filterBy = null) {
     let contactsToReturn
      try {
-        contactsToReturn = await storageService.query('contactDB')
+        contactsToReturn = await storageService.query(CONTACT_KEY)
         return (sort(contactsToReturn))
      } catch (err) {
             console.log('Error while loading contacts')
@@ -167,7 +167,7 @@ async function getContacts(filterBy = null) {
 
 async function deleteContact(id) {
      try {
-        return await storageService.remove('contactDB', id)
+        return await storageService.remove(CONTACT_KEY, id)
     } catch (err) {
         console.log('Error while deleting contact')
         throw err
@@ -177,7 +177,7 @@ async function deleteContact(id) {
 
 async function _updateContact(contact) {
     try {
-        return await storageService.put('contactDB', contact)
+        return await storageService.put(CONTACT_KEY, contact)
     } catch (err) {
         console.log('Error while updating contact')
         throw err
@@ -187,7 +187,7 @@ async function _updateContact(contact) {
 
 async function _addContact(contact) {
     try {
-        return await storageService.post('contactDB', contact)
+        return await storageService.post(CONTACT_KEY, contact)
     } catch (err) {
         console.log('Error while adding contact')
         throw err
@@ -208,22 +208,15 @@ function getEmptyContact() {
 }
 
 
-
-
-function _makeId(length = 10) {
-    var txt = ''
-    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-    for (var i = 0; i < length; i++) {
-        txt += possible.charAt(Math.floor(Math.random() * possible.length))
+async function getContactById(id) {
+    try {
+        const contact = await storageService.get(CONTACT_KEY, id)
+        return contact
+    } catch (err) {
+        console.log('Error while loading contact from storage')
+        throw err
+    
     }
-    return txt
-}
-
-function getContactById(id) {
-    return new Promise((resolve, reject) => {
-        const contact = contacts.find(contact => contact._id === id)
-        contact ? resolve(contact) : reject(`Contact id ${id} not found!`)
-    })
 }
 
 // function filter(term) {
@@ -233,4 +226,14 @@ function getContactById(id) {
 //             contact.phone.toLocaleLowerCase().includes(term) ||
 //             contact.email.toLocaleLowerCase().includes(term)
 //     })
+// }
+
+
+// function _makeId(length = 10) {
+//     var txt = ''
+//     var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+//     for (var i = 0; i < length; i++) {
+//         txt += possible.charAt(Math.floor(Math.random() * possible.length))
+//     }
+//     return txt
 // }

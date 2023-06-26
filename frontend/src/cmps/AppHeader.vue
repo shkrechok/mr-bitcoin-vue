@@ -12,6 +12,7 @@ export default {
     async created() {
         this.bitcoinRate = await bitcoinService.getRate()
     },
+
     computed:{
         loggedInUser(){
             return this.$store.getters.loggedInUser
